@@ -37,7 +37,7 @@ jobs:
     env:
       kernelDir: ${{ matrix.repos.kernelSource.name }}_${{ matrix.repos.kernelSource.device }}
 
-      kernelName: ${{ matrix.repos.kernelSource.name }}
+      kernelName:best
       kernelRepo: https://github.com/MrRob0-X/Nethunter_kernel_samsung_a23
       kernelBranch: stock-14
       kernelDevice: https://github.com/MrRob0-X/Nethunter_kernel_samsung_a23
@@ -54,10 +54,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y build-essential bc curl git zip ftp gcc-aarch64-linux-gnu gcc-arm-linux-gnueabi libssl-dev lftp zstd wget libfl-dev python2 python3 libarchive-tools
 
-      - name: "🌟 Clone kernel source => (${{ env.kernelRepo }})"
-        working-directory: ./${{ env.kernelDir }}
+      - name: "🌟 Clone kernel source => https://github.com/MrRob0-X/Nethunter_kernel_samsung_a23
+        working-directory: stock-14
         run: |
-          git clone --recursive --branch $kernelBranch $kernelRepo $kernelName --depth=1
+          git clone --recursive --branch $kernelBranch $kernelRepo $kernelname --depth=1
 
       - name: "💫 Get toolchains"
         working-directory: ./${{ env.kernelDir }}
@@ -145,10 +145,10 @@ jobs:
           args: ${{ steps.generate-args.outputs.args }}
         run: |
           echo "PATH Variable: $PATH"
-          make ${{ env.args }} ${{ env.DEFCONFIG_NAME }}
+          make ${{ env.args }} ${{ env.build.config.sm6225 }}
 
       - name: "🎶 Build kernel"
-        working-directory: ./${{ env.kernelDir }}/${{ env.kernelName }}
+        working-directory: ./${{ env.kerneldir }}/${{ env.kernelName }}
         env:
           args: ${{ steps.generate-args.outputs.args }}
         run: |
@@ -182,7 +182,7 @@ jobs:
       - name: "❤️ Upload dtbo.img"
         uses: actions/upload-artifact@v3
         with:
-          name: dtbo.img(${{ env.kernelDevice }}-${{ env.kernelName }}-${{ env.kernelBranch }})
+          name: dtbo.img(${{ env.kernelDevice }}-${{ env.best }}-${{ env.kernel Branch}})
           path: ./${{ env.kernelDir }}/${{ env.OUT_DIR }}/arch/${{ env.ARCH }}/boot/dtbo.img
           if-no-files-found: ignore
           retention-days: 7
