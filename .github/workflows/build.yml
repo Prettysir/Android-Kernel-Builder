@@ -38,9 +38,9 @@ jobs:
       kernelDir: ${{ matrix.repos.kernelSource.name }}_${{ matrix.repos.kernelSource.device }}
 
       kernelName: ${{ matrix.repos.kernelSource.name }}
-      kernelRepo: ${{ matrix.repos.kernelSource.repo }}
-      kernelBranch: ${{ matrix.repos.kernelSource.branch }}
-      kernelDevice: ${{ matrix.repos.kernelSource.device }}
+      kernelRepo: https://github.com/MrRob0-X/Nethunter_kernel_samsung_a23
+      kernelBranch: stock-14
+      kernelDevice: https://github.com/MrRob0-X/Nethunter_kernel_samsung_a23
 
       DEFCONFIG_NAME: ${{ matrix.repos.kernelSource.device }}_defconfig
 
